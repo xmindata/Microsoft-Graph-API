@@ -93,6 +93,7 @@ class CleanSharepoint():
                 drive_id = message['id']
         return drive_id
 
+
 current_time = datetime.datetime.now()
 print (f"starting from {current_time}")
 cleanser = CleanSharepoint()
