@@ -4,4 +4,5 @@ The purpose of this work is to clean up the sharepoint folder to see if there ar
 
 `Refresh token' mechanism is used in this project. The token will be refreshed every time.
  
+ Every folder in the drive will be visited, conditions will be applied to determine if the file shall be moved.
  
