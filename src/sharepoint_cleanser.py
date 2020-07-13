@@ -94,6 +94,16 @@ class CleanSharepoint():
         return drive_id
 
 
+    def _fetch_drive_folder(self, site_id, drive_id):
+        access_token = self.get_access_token()
+        headers = {'Authorization': f'Bearer {access_token}'}
+
+        def _folder_list_to_url(folder_list: List[Text]):
+            if len(folder_list) == 1:
+                return f"https://graph.microsoft.com/v1.0/sites/{site_id}/drives/{drive_id}/items/root/?expand=children"
+            folder_string = '/'.join(folder_list)
+            return f"https://graph.microsoft.com/v1.0/sites/{site_id}/drives/{drive_id}/items/root:/{folder_string}?expand=children"
+
 current_time = datetime.datetime.now()
 print (f"starting from {current_time}")
 cleanser = CleanSharepoint()
