@@ -104,6 +104,18 @@ class CleanSharepoint():
             folder_string = '/'.join(folder_list)
             return f"https://graph.microsoft.com/v1.0/sites/{site_id}/drives/{drive_id}/items/root:/{folder_string}?expand=children"
 
+        def _request_folder_contents(url, headers, refresh_token_flag):
+            response = requests.get(url, headers=headers)
+            if not 200 <= response.status_code < 300:
+                #TODO: export the log into the file
+                print(f"Got invalid response on url: {url}, response: {response} at {datetime.datetime.now()}")
+                print(f"{response.json()} ")
+                refresh_token_flag = True
+                return (" ", refresh_token_flag)
+            else:
+                refresh_token_flag = False
+                return response.json()['children'], refresh_token_flag
+
 current_time = datetime.datetime.now()
 print (f"starting from {current_time}")
 cleanser = CleanSharepoint()
