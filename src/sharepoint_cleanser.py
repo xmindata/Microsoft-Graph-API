@@ -116,6 +116,22 @@ class CleanSharepoint():
                 refresh_token_flag = False
                 return response.json()['children'], refresh_token_flag
 
+        def _ancestor_names(ancestors):
+            return [folder_name for (_, folder_name) in ancestors]
+
+        def _get_current_child(ancestors, current_folder_contents):
+            count, _ = ancestors[-1]
+            return current_folder_contents[count]
+
+        def _is_folder(child):
+            if 'folder' in child:
+                return True
+            return False
+
+
+
+
+
 current_time = datetime.datetime.now()
 print (f"starting from {current_time}")
 cleanser = CleanSharepoint()
